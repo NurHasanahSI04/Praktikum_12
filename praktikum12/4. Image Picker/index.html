@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: aqua;
+
+        }
+        .form{
+            background-color: white;
+            width: 500px; height: 500px;
+            margin: auto;
+            border-radius: 10%;
+        }
+        #gambar{
+            width: 350px;
+        }
+        .option{
+            text-align: center;
+            
+        }
+        .container{
+            text-align: center;
+        }
+        
+       
+    </style>
+    <script>
+
+        function image_picker(){
+            const daftar_gambar = ["mug.jpeg", "tas.jpeg", "yasin.jpeg", "yasin_hard.jpeg", "id.jpeg", "kartu.jpeg" ];
+            let pilihan = document.getElementById("option").value;
+
+            if( pilihan == "mug"){
+                let select = daftar_gambar[0];
+                document.getElementById("gambar").src = `images/${select}`;
+            }
+
+            if( pilihan == "tas"){
+                let select = daftar_gambar[1];
+                document.getElementById("gambar").src = `images/${select}`;
+            }
+
+            if( pilihan == "yasin"){
+                let select = daftar_gambar[2];
+                document.getElementById("gambar").src = `images/${select}`;
+            }
+
+            if( pilihan == "yasin_hard"){
+                let select = daftar_gambar[3];
+                document.getElementById("gambar").src = `images/${select}`;
+            }
+
+            if( pilihan == "id"){
+                let select = daftar_gambar[4];
+                document.getElementById("gambar").src = `images/${select}`;
+            }
+
+            if( pilihan == "kartu"){
+                let select = daftar_gambar[5];
+                document.getElementById("gambar").src = `images/${select}`;
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <div class="form">
+    <br>
+    <h1 align="center">PRODUK PERCETAKAN</h1>
+    
+    <div class="option">
+    <select name="" id="option" onchange="image_picker()" >
+        <option value=""> Pilih Gambar :</option>
+        <option value="mug"> Mug Press </option>
+        <option value="tas"> Tas Puring </option>
+        <option value="yasin"> Buku Yasin Soft Cover</option>
+        <option value="yasin_hard"> Buku Yasin Hard Cover </option>
+        <option value="id"> Id Card </option>
+        <option value="kartu"> Kartu Nama </option>
+    </select>
+    </div>
+    <div class="container">
+        <img id="gambar">
+    </div>
+    </div>
+
+</body>
+</html>

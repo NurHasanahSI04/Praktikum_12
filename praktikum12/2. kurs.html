@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konverter Mata Uang</title>
+    <style>
+        .tabel {text-align: center;}
+        #jumlah_Uang {width: 300px;}
+        #mata_Uang_Asal, #mata_Uang_Tujuan {width: 300px;}
+    </style>
+    <script>
+        function hitung() {
+            let jumlahUang = parseFloat(document.getElementById("jumlah_Uang").value);
+            let mataUangAsal = document.getElementById("mata_Uang_Asal").value;
+            let mataUangTujuan = mata_Uang_Asal.value;
+
+            let uang_asing = {
+                'USD': 9915,
+                'SGD': 13472,
+                'MYR': 874,
+                'JPY': 120,
+                'EUR': 15888,
+                'SAR': 3592
+            };
+
+            if (!isNaN(jumlahUang)) {
+                let rate = uang_asing[mataUangTujuan];
+                let hasil = jumlahUang * rate; 
+                document.getElementById('hasil').innerHTML = 'Nilai ' + mataUangTujuan + ': ' + hasil.toFixed(2);
+            } else {
+                document.getElementById('hasil').innerHTML = 'Masukkan angka yang valid.';
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1 align="center">KALKULATOR KURS | Konversi Mata Uang</h1>
+    <hr>
+    
+    <table align="center" cellpadding="8">
+        <tr>
+            <td><label for="jumlah_Uang">Jumlah Uang</label></td>
+            <td>:</td>
+            <td><input type="number" id="jumlah_Uang" placeholder="Masukkan jumlah uang"></td>
+        </tr>
+        
+        <tr>
+            <td><label for="mata_Uang_Asal">Mata Uang Asal</label></td>
+            <td>:</td>
+            <td>
+                <select id="mata_Uang_Asal">
+                    <option value="USD">Dollar US</option>
+                    <option value="SGD">Dollar Singapore</option>
+                    <option value="MYR">Ringgit Malaysia</option>
+                    <option value="JPY">Yen Jepang</option>
+                    <option value="EUR">Euro</option>
+                    <option value="SAR">Riyal Arab Saudi</option>
+                </select>
+            </td>
+        </tr>
+    
+        <tr>
+            <td><label for="mata_Uang_Tujuan">Mata Uang Tujuan</label></td>
+            <td>:</td>
+            <td>
+                <select id="mata_Uang_Tujuan">
+                    <option value="Rupiah">Rupiah</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <div class="tabel">
+        <button onclick="hitung()" align="center" style="background-color: greenyellow;">Hitung Nilai Tukar</button>
+    </div>
+    <br>
+    
+    <div id="hasil" align="center"></div>
+</body>
+</html>

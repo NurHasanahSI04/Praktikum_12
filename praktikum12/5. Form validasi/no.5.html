@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validation</title>
+  <style>
+    .error {
+      color: red;
+    }
+    .kotak{
+      background-color: aquamarine;
+      width: 400px;
+      height: 300px;
+      border-radius: 2px;
+      
+    }
+  </style>
+</head>
+<body>
+  <div class="kotak" align="center">
+  <h2>Formulir Pemesanan Tiket</h2>
+  <form id="bookingForm" onsubmit="validateForm(); return false;">
+    <table>
+      <tr>
+    <td><label for="nama">Nama Pelanggan</label></td>
+    <td>:</td>
+    <td><input type="text" id="nama" required maxlength="30"><br></td>
+      </tr>
+      <tr>
+    <td> <label for="email">Email</label></td>
+    <td>:</td>
+    <td><input type="email" id="email" required><br></td>
+       </tr>
+       <tr>
+    <td><label for="jam">Jam Keberangkatan:</label></td>
+    <td>:</td>
+    <td><input type="text" id="jam" placeholder="Format: HH.MM" required pattern="(?:[01]\d|2[0-3]):[0-5]\d"><br></td>
+        </tr>
+       
+       <tr>
+    <td> <label for="tujuan">Tujuan Keberangkatan:</label></td>
+    <td>:</td>
+    <td><input type="text" id="jam" placeholder="Format: HH.MM" required pattern="(?:[01]\d|2[0-3]):[0-5]\d"><br><input type="text" id="tujuan" required><br>
+    </td>
+       </tr>
+    
+      <tr>
+    <td> <label for="jumlahTiket">Jumlah Tiket:</label></td>
+    <td>:</td>
+    <div class="tiket">
+    <td><input type="number" id="jumlahTiket" required min="1" max="10" ><br></td>
+    </div>
+    </tr>
+
+    </table>
+
+    <button type="submit">Submit</button>
+  </form>
+  </div>
+
+  <div id="result"></div>
+
+  <script>
+    function validateForm() {
+      var nama = document.getElementById("nama").value;
+      var email = document.getElementById("email").value;
+      var jam = document.getElementById("jam").value;
+      var tujuan = document.getElementById("tujuan").value;
+      var jumlahTiket = document.getElementById("jumlahTiket").value;
+
+      var errorMessages = [];
+
+      
+      if (nama.length === 0 || nama.length > 30) {
+        errorMessages.push("Nama Pelanggan harus diisi dan maksimal 30 karakter.");
+        document.getElementById("nama").style.borderColor = "red";
+      } else {
+        document.getElementById("nama").style.borderColor = "";
+      }
+
+      
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        errorMessages.push("Format Email tidak valid.");
+        document.getElementById("email").style.borderColor = "red";
+      } else {
+        document.getElementById("email").style.borderColor = "";
+      }
+
+      
+      var jamRegex = /^(?:[01]\d|2[0-3]):[0-5]\d$/;
+      if (!jamRegex.test(jam)) {
+        errorMessages.push("Format Jam Keberangkatan tidak valid (HH.MM).");
+        document.getElementById("jam").style.borderColor = "red";
+      } else {
+        document.getElementById("jam").style.borderColor = "";
+      }
+
+      
+      if (tujuan.length === 0) {
+        errorMessages.push("Tujuan Keberangkatan harus diisi.");
+        document.getElementById("tujuan").style.borderColor = "red";
+      } else {
+        document.getElementById("tujuan").style.borderColor = "";
+      }
+
+      
+      var jumlahTiketInt = parseInt(jumlahTiket, 10);
+      if (isNaN(jumlahTiketInt) || jumlahTiketInt < 1 || jumlahTiketInt > 10) {
+        errorMessages.push("Jumlah Tiket harus berupa bilangan bulat antara 1 dan 10.");
+        document.getElementById("jumlahTiket").style.borderColor = "red";
+      } else {
+        document.getElementById("jumlahTiket").style.borderColor = "";
+      }
+
+     
+      var resultContainer = document.getElementById("result");
+      if (errorMessages.length > 0) {
+        resultContainer.innerHTML = '<div class="error">' + errorMessages.join('<br>') + '</div>';
+      } else {
+        resultContainer.innerHTML = '<h3>Data Formulir:</h3>' +
+                                    '<p>Nama Pelanggan: ' + nama + '</p>' +
+                                    '<p>Email: ' + email + '</p>' +
+                                    '<p>Jam Keberangkatan: ' + jam + '</p>' +
+                                    '<p>Tujuan Keberangkatan: ' + tujuan + '</p>' +
+                                    '<p>Jumlah Tiket: ' + jumlahTiket + '</p>';
+      }
+    }
+  </script>
+
+</body>
+</html>
